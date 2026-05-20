@@ -2,7 +2,7 @@
 # Adjust `app` to a name unique to your Fly account (this one is a suggestion).
 
 app            = "contract-risk-reviewer"
-primary_region = "bom"   # Mumbai. Change as needed: iad, sin, fra, lhr, etc.
+primary_region = "sin"   # Singapore. Change as needed: bom, iad, fra, lhr, etc.
 
 [build]
   # Use the Dockerfile in the repo root — explicit, reproducible.
