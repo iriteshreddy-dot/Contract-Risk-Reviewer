@@ -1,0 +1,24 @@
+MUTUAL NON-DISCLOSURE AGREEMENT
+
+This Non-Disclosure Agreement is entered into between Acme Corp ("Disclosing Party") and the undersigned recipient ("Receiving Party").
+
+1. DEFINITION OF CONFIDENTIAL INFORMATION
+Confidential Information means any non-public information disclosed by one party to the other, whether orally or in writing, that is designated as confidential or that reasonably should be understood to be confidential given the nature of the information.
+
+2. OBLIGATIONS OF THE RECEIVING PARTY
+The Receiving Party shall protect the Disclosing Party's Confidential Information using reasonable care and shall use it solely to evaluate the proposed business relationship between the parties.
+
+3. TERM OF CONFIDENTIALITY
+The Receiving Party's obligations under this Agreement shall survive termination indefinitely and the duty of confidentiality is perpetual and shall never expire.
+
+4. LIMITATION OF LIABILITY
+The Receiving Party agrees to accept unlimited liability for any disclosure of Confidential Information, and there shall be no limitation of liability of any kind under this Agreement.
+
+5. INDEMNIFICATION
+The Receiving Party shall indemnify and hold harmless from any and all claims, losses, damages, and expenses the Disclosing Party, its officers, and its affiliates, without limitation and regardless of cause.
+
+6. RETURN OF MATERIALS
+Upon written request, the Receiving Party shall promptly return or destroy all materials containing Confidential Information within thirty (30) days.
+
+7. GOVERNING LAW
+This Agreement shall be governed by the laws of the State of Delaware, and the parties submit to the non-exclusive jurisdiction of its courts.

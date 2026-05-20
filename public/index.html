@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="A multi-agent contract reviewer. Every clause scored. Every trap surfaced." />
+  <title>Clause / Contract Risk Reviewer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=JetBrains+Mono:wght@300..700&display=swap"
+  />
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-family='serif' font-weight='800' font-size='30'>§</text></svg>" />
+</head>
+<body>
+  <!-- ── Grain overlay (decorative) ── -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ── Top bar ── -->
+  <header class="topbar">
+    <button id="brandHome" class="brand" type="button" aria-label="Back to home">
+      <span class="brand__mark" aria-hidden="true">§</span>
+      <span class="brand__name">Clause</span>
+      <span class="brand__divider">/</span>
+      <span class="brand__tag">Contract Risk Reviewer</span>
+    </button>
+    <nav class="topbar__nav">
+      <span class="kv kv--llm"><span class="kv__k">llm</span><span class="kv__v" id="llmState">…</span></span>
+    </nav>
+  </header>
+
+  <main id="app">
+    <!-- ════════════ LANDING ════════════ -->
+    <section id="landing" class="landing">
+      <div class="landing__copy">
+        <p class="eyebrow">A multi-agent legal reviewer</p>
+        <h1 class="display">
+          Read every clause.<br />
+          <em>Find every trap.</em>
+        </h1>
+        <p class="lede">
+          Drop a contract in. It is split clause by clause, scored 0&nbsp;to&nbsp;100 for legal
+          risk, and the dangerous clauses are rewritten — with every output validated in
+          server code, never in prompts.
+        </p>
+      </div>
+
+      <form id="inputForm" class="landing__input" autocomplete="off">
+        <label class="paper paper--input" for="textInput">
+          <div class="paper__head">
+            <span class="paper__rule"></span>
+            <span class="paper__tag">CONTRACT</span>
+            <span class="paper__rule"></span>
+          </div>
+          <textarea
+            id="textInput"
+            class="paper__body"
+            spellcheck="false"
+            placeholder="Paste the contract text here, or drop a .pdf / .txt anywhere on this sheet."
+          ></textarea>
+          <div class="paper__footer">
+            <span class="counter"><span id="wordCount">0</span> words</span>
+            <span class="counter" id="dropHint">Drop a file here</span>
+          </div>
+          <input type="file" id="fileInput" accept=".pdf,.txt" hidden />
+          <div class="paper__overlay" id="dropOverlay">
+            <span>Release to read the contract</span>
+          </div>
+        </label>
+
+        <div class="controls">
+          <input
+            type="text"
+            id="contractName"
+            class="namefield"
+            placeholder="Contract name (optional)"
+            maxlength="80"
+          />
+          <div class="controls__buttons">
+            <button type="button" id="loadSample" class="btn btn--ghost">
+              <span>Load sample NDA</span>
+            </button>
+            <button type="submit" id="runBtn" class="btn btn--primary">
+              <span>Run review</span>
+              <span class="btn__arrow">→</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <!-- ════════════ LOADING ════════════ -->
+    <section id="loading" class="loading hidden" aria-live="polite">
+      <p class="eyebrow">Reviewing<span class="dots"><i></i><i></i><i></i></span></p>
+      <h2 class="display-sm">Reading <em id="loadingName">your contract</em>.</h2>
+
+      <ol class="phases" id="phases">
+        <li data-phase="1"><span class="ph__num">01</span><span class="ph__name">Pre-check</span></li>
+        <li data-phase="2"><span class="ph__num">02</span><span class="ph__name">Splitting</span></li>
+        <li data-phase="3"><span class="ph__num">03</span><span class="ph__name">Classification</span></li>
+        <li data-phase="4"><span class="ph__num">04</span><span class="ph__name">Decision</span></li>
+        <li data-phase="5"><span class="ph__num">05</span><span class="ph__name">Suggestion</span></li>
+        <li data-phase="6"><span class="ph__num">06</span><span class="ph__name">Validation</span></li>
+        <li data-phase="7"><span class="ph__num">07</span><span class="ph__name">Report</span></li>
+      </ol>
+
+      <p class="loading__hint">
+        Validation is enforced in MCP server code, not the LLM prompt.
+      </p>
+    </section>
+
+    <!-- ════════════ RESULTS ════════════ -->
+    <section id="results" class="results hidden">
+      <header class="results__head">
+        <div class="results__title">
+          <p class="eyebrow" id="contractMeta">—</p>
+          <h2 class="display-sm" id="contractTitle">—</h2>
+        </div>
+
+        <div class="results__score">
+          <div class="score" id="score">
+            <span class="score__num" id="scoreNum">0</span>
+            <span class="score__denom">/100</span>
+          </div>
+          <p class="score__label">Overall risk</p>
+        </div>
+
+        <div class="results__summary" id="summaryChips" role="list"></div>
+
+        <div class="results__actions">
+          <button id="newReview" class="btn btn--ghost btn--sm">
+            <span class="btn__arrow">↺</span><span>New review</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="spread">
+        <article id="contractView" class="paper paper--results"></article>
+        <aside id="detail" class="detail">
+          <div class="detail__placeholder">
+            <span class="detail__hint-mark">→</span>
+            <p>Select a clause in the margin to inspect its risk, reasoning, and suggested rewrite.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ════════════ ERROR ════════════ -->
+    <section id="error" class="error hidden">
+      <p class="eyebrow eyebrow--alert">Something went wrong</p>
+      <p class="error__msg" id="errorMsg">—</p>
+      <button class="btn btn--ghost" id="errorBack">Back</button>
+    </section>
+  </main>
+
+  <script src="/app.js" type="module"></script>
+</body>
+</html>

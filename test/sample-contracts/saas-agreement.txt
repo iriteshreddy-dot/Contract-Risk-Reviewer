@@ -1,0 +1,39 @@
+SOFTWARE-AS-A-SERVICE AGREEMENT
+
+This SaaS Agreement is entered into between CloudVault Inc. ("Provider") and the subscribing customer ("Customer").
+
+1. SERVICES
+Provider shall make its hosted software platform available to Customer on a subscription basis, subject to the terms of this Agreement and the applicable order form.
+
+2. FEES AND PAYMENT
+All subscription fees are non-refundable and are payable immediately upon receipt of invoice. Overdue amounts shall accrue interest on overdue balances at a rate of five percent (5%) per month.
+
+3. TERM AND TERMINATION
+Provider may terminate this Agreement or suspend Customer's access at any time without cause and without notice. Customer may terminate only for material breach with thirty (30) days written notice and a cure period.
+
+4. INTELLECTUAL PROPERTY
+Customer assigns all right, title and interest in any feedback, configurations, and derivative materials to Provider on a perpetual, irrevocable, worldwide basis, and Customer waives any moral rights therein.
+
+5. LIMITATION OF LIABILITY
+There shall be no limitation of liability for Customer under this Agreement, and Customer shall be liable for all damages of any kind, including consequential damages, arising from its use of the services.
+
+6. INDEMNIFICATION
+Customer shall defend, indemnify and hold harmless from any and all claims the Provider against any claims arising from Customer's use of the platform. Provider has no corresponding indemnification obligation.
+
+7. CONFIDENTIALITY
+Each party shall protect the other party's confidential information using at least reasonable care and shall use such information solely to perform under this Agreement.
+
+8. DATA SECURITY
+Provider shall maintain commercially reasonable administrative, physical, and technical safeguards designed to protect Customer data against unauthorized access.
+
+9. AMENDMENTS
+Provider reserves the right and the sole discretion to modify these terms at any time, and any such unilateral amendment shall be effective immediately upon posting.
+
+10. WARRANTIES
+Provider warrants that the services will perform materially in accordance with its published documentation during the subscription term.
+
+11. GOVERNING LAW AND DISPUTES
+This Agreement is governed by the laws of the State of New York. Each party agrees to waive any right to a jury trial and consents to the exclusive jurisdiction of the courts located in New York County.
+
+12. GENERAL
+This Agreement constitutes the entire agreement between the parties and supersedes all prior understandings relating to its subject matter.
