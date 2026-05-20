@@ -1,14 +1,12 @@
 /**
  * Contract Parser MCP Server
  * ==========================
- * Contract input layer — the legal-domain port of angel-one-mcp.
- * Transport: stdio.
+ * Contract input layer. Transport: stdio.
  *
- * Where angel-one-mcp pulls market data, this server pulls contract data:
- * it parses raw text or PDF, splits a contract into clauses, and identifies
+ * Parses raw text or PDF, splits a contract into clauses, and identifies
  * clause types. Splitting uses cheap heuristics FIRST (numbered sections,
- * headings, recitals) and only an agent's LLM is asked to disambiguate the
- * leftovers — the same batch-first discipline as get_watchlist_quotes().
+ * headings, recitals) and only escalates to the LLM to disambiguate the
+ * leftovers — batch-first discipline for cost efficiency.
  *
  * Tools:
  *   - parse_contract       : raw text or PDF -> a contract object

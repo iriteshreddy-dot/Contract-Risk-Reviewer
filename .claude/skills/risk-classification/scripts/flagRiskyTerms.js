@@ -1,13 +1,12 @@
 /**
  * Risky-term keyword scanning for contract clauses.
- * Mirrors score_sentiment.py from the trading agent.
  *
- *   RISKY_TERMS    ↔ BEARISH_KEYWORDS  (push risk score up)
- *   STANDARD_TERMS ↔ BULLISH_KEYWORDS  (fair/balanced language, pull risk down)
- *   VETO_TERMS     ↔ RED_FLAGS         (automatic HIGH RISK override)
+ *   RISKY_TERMS    — push the clause's risk score up
+ *   STANDARD_TERMS — fair / balanced language, pulls the risk score down
+ *   VETO_TERMS     — automatic HIGH (one) or CRITICAL (two or more) override
  *
- * Keyword matching runs FIRST — it is fast and free. The LLM is only consulted
- * for clauses the keyword scan leaves ambiguous (mirrors batch-first design).
+ * Keyword matching runs FIRST — it is fast and free. The LLM is only
+ * consulted for clauses the keyword scan leaves ambiguous.
  */
 
 import { VETO_TERMS } from '../../../../mcp-servers/shared/index.js';
@@ -115,7 +114,6 @@ export function flagRiskyTerms(clauseText) {
 /**
  * Slightly discount the risk of clauses buried late in a contract's
  * boilerplate tail — they are statistically less negotiated.
- * Mirrors apply_time_decay() from score_sentiment.py.
  *
  * Returns a multiplier in [0.9, 1.0]; never increases score.
  */

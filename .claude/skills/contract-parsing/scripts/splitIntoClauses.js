@@ -1,7 +1,7 @@
 /**
  * Split raw contract text into individual clauses.
- * Mirrors the batch-first design of get_watchlist_quotes() — cheap heuristics
- * run FIRST; the LLM is only a fallback for genuinely ambiguous documents.
+ * Cheap heuristics run FIRST; the LLM is only a fallback for genuinely
+ * ambiguous documents.
  *
  * Heuristics, in priority order:
  *   1. Numbered sections   — "1.", "1.1", "12."

@@ -1,13 +1,11 @@
 /**
  * Legal Knowledge MCP Server
  * ==========================
- * The knowledge base — the legal-domain port of news-sentiment-mcp.
- * Transport: stdio.
+ * The knowledge base. Transport: stdio.
  *
- * Where news-sentiment-mcp serves market keywords and red flags, this server
- * serves the risky-terms library, balanced clause templates, and the review
- * playbook. score_clause_sentiment mirrors score_headline(): a fast, free
- * keyword scan that runs before any LLM call.
+ * Serves the risky-terms library, balanced clause templates, and the
+ * review playbook. score_clause_sentiment is a fast, free keyword scan
+ * that runs before any LLM call.
  *
  * Tools:
  *   - get_risky_terms        : categorized risky legal terms with risk weights

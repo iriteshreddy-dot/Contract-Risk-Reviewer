@@ -1,10 +1,10 @@
 /**
- * Reference implementation of the 7-phase review pipeline.
- * Mirrors run_trading_cycle.py — this script DOCUMENTS the orchestration flow.
+ * Reference outline of the 7-phase review pipeline.
  *
- * The production path is src/agents/orchestrator.js (runReviewPipeline), which
- * wires the real Splitter/Classifier/Suggester agents to live MCP clients.
- * This file is a readable, dependency-light walkthrough of the same 7 phases.
+ * The production path is src/agents/orchestrator.js (`runReviewPipeline`),
+ * which wires the real Splitter / Classifier / Suggester agents to live
+ * MCP clients. This file is a readable, dependency-light walkthrough of
+ * the same 7 phases for documentation purposes.
  */
 
 export const REVIEW_PHASES = [

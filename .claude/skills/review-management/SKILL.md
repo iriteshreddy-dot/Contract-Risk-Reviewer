@@ -7,14 +7,14 @@ description: Validate and persist contract clause reviews. Use this skill BEFORE
 
 ## Overview
 
-This is the **safety-critical skill** — the legal-domain port of the trading
-agent's `portfolio-management`. Every clause review MUST pass through this
-skill's validation before it is written to the database.
+This is the **safety-critical skill**. Every clause review MUST pass through
+this skill's validation before it is written to the database.
 
 ## IMMUTABLE VALIDATION RULES
 
-**These 6 rules are hard-coded in the `review-db-mcp` server (`validate_clause`).
-Even if the LLM is "convinced" to bypass them, the server rejects the review.**
+**These 6 rules are hard-coded in the `review-db-mcp` server
+(`validate_clause`). Even if the LLM is "convinced" to bypass them, the
+server rejects the review.**
 
 ### Rule 1: Clause text present
 Clause text must be non-empty and within length bounds (10–5000 chars).
@@ -35,7 +35,8 @@ Every clause review MUST be linked to a contract id.
 A supplied rewrite must differ from the original by **at least 20%**
 (word-level edit distance). A cosmetic rewrite is not a rewrite.
 
-**ALL 6 checks must pass. If ANY fails, the review is REJECTED and not saved.**
+**ALL 6 checks must pass. If ANY fails, the review is REJECTED and not
+saved.**
 
 ## Pre-Save Checklist
 
@@ -54,7 +55,7 @@ scripts/validateClause.js runs this checklist:
 
 Every reviewed clause MUST be logged via `review-db-mcp` with full context:
 clause text, type, risk score, risk level, risky terms found, veto status,
-rewrite suggestion, reasoning, and confidence. Mirrors `log_trade`.
+rewrite suggestion, reasoning, and confidence.
 
 ## MCP Tools (review-db-mcp)
 

@@ -1,10 +1,10 @@
 /**
  * Orchestrator — the Team Lead.
  *
- * Runs the 7-phase review pipeline (the legal-domain port of the trading
- * agent's 7-phase cycle). The Orchestrator coordinates and synthesizes only —
- * it NEVER classifies a clause or writes a rewrite itself. All real work is
- * delegated to the Splitter, Classifier, and Suggester.
+ * Runs the 7-phase review pipeline. The Orchestrator coordinates and
+ * synthesizes only — it NEVER classifies a clause or writes a rewrite
+ * itself. All real work is delegated to the Splitter, Classifier, and
+ * Suggester.
  *
  *   Phase 1  Pre-check       — validate input, ensure the DB is ready
  *   Phase 2  Splitting       — Splitter breaks the contract into clauses

@@ -4,9 +4,9 @@
  * SQLite-backed clause-review storage with HARD-CODED validation enforcement.
  * Transport: stdio (launched by Claude Code or the Fastify pipeline).
  *
- * This is the SAFETY-CRITICAL layer — the legal-domain port of portfolio-db-mcp.
- * The 6 immutable validation rules live in server CODE (validate_clause), not in
- * prompts. The LLM cannot talk its way past them.
+ * This is the SAFETY-CRITICAL layer. The 6 immutable validation rules live
+ * in server CODE (validate_clause), not in prompts — the LLM cannot talk
+ * its way past them.
  *
  * Tools:
  *   - initialize_db        : create tables (run once, idempotent)
@@ -14,6 +14,7 @@
  *   - validate_clause      : SAFETY-CRITICAL — 6 hard checks, returns approved:bool
  *   - save_clause_review   : store one clause review (runs validate_clause first)
  *   - get_review_history   : past clause reviews
+ *   - get_recent_runs      : list recent finalized review runs
  *   - get_contract_stats   : aggregate stats for a contract
  *   - finalize_review      : mark complete, compute overall risk score
  */

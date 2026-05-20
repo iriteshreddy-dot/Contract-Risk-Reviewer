@@ -1,12 +1,10 @@
 /**
  * Structural risk-pattern detection for contract clauses.
- * Mirrors detect_patterns.py (candlestick pattern detection).
  *
- * Trading agent: bullish/bearish chart patterns add a +/-10 bonus.
- * Here:          one-sided / open-ended drafting patterns add a risk penalty.
- *
- * These catch risk that keyword matching misses — e.g. a clause that is risky
- * because of its STRUCTURE (unilateral, open-ended) rather than a single term.
+ * Catches risk that keyword matching misses — clauses risky because of
+ * their STRUCTURE rather than any single term: unilateral change rights,
+ * sole-discretion grants, no-notice action, perpetual obligations,
+ * open-ended "any and all" scope, no-cure-period terminations.
  */
 
 const PATTERNS = [

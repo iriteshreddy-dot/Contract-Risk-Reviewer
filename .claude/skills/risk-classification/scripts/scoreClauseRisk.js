@@ -1,23 +1,23 @@
 /**
  * Composite clause risk scoring.
- * Mirrors compute_composite_score() / score_signal_strength.py.
  *
- * Trading agent: indicator sub-scores (RSI/MACD/EMA/BB/Volume) → 0-100 signal.
- * Here:          legal-risk sub-scores per category            → 0-100 risk.
- *
- * Each category contributes up to a capped maximum. The caps sum to 100, so the
- * raw category total is already on a 0-100 scale.
+ * Combines per-category legal-risk sub-scores into a single 0-100 score.
+ * Each category contributes up to a capped maximum; the raw total is then
+ * normalized against a realistic single-clause ceiling (since a real
+ * clause typically only touches 1-2 categories), and structural-pattern
+ * and LLM adjustments are applied on top.
  */
 
 import { riskLevelFromScore } from '../../../../mcp-servers/shared/index.js';
 
-// Per-category contribution caps. Mirrors the +/- ranges of RSI/MACD/EMA/BB/Volume.
+// Per-category contribution caps. The largest cap goes to liability —
+// uncapped liability is the most damaging single risk in a contract.
 export const RISK_WEIGHTS = {
-  liability: { max: 25 }, // mirrors MACD (widest band — most damaging)
-  indemnity: { max: 20 }, // mirrors RSI
-  ip_rights: { max: 20 }, // mirrors EMA trend
-  termination: { max: 15 }, // mirrors Bollinger
-  governing_law: { max: 10 }, // mirrors volume
+  liability: { max: 25 },
+  indemnity: { max: 20 },
+  ip_rights: { max: 20 },
+  termination: { max: 15 },
+  governing_law: { max: 10 },
   payment: { max: 10 },
 };
 

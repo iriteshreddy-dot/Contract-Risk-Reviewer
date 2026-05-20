@@ -1,10 +1,10 @@
 /**
  * Clause-review journaling — format a review entry.
- * Mirrors log_trade.py: the actual persistence goes through the
- * review-db-mcp `save_clause_review` tool. This helper just shapes the record.
  *
- * Every reviewed clause MUST be logged with full reasoning context, exactly as
- * the trading agent logs every trade.
+ * The actual persistence goes through the `review-db-mcp`
+ * `save_clause_review` tool. This helper just shapes the record. Every
+ * reviewed clause MUST be logged with full reasoning context — the trail
+ * is how we audit the system's decisions.
  */
 
 import { nowISO, genId } from '../../../../mcp-servers/shared/index.js';

@@ -1,10 +1,10 @@
 /**
  * Clause validation — all 6 immutable checks must pass.
- * Mirrors check_risk_limits.py: this script DOCUMENTS the validation logic.
  *
- * In production the authoritative implementation is the review-db-mcp
- * `validate_clause` tool — enforced in server CODE so the LLM cannot bypass it.
- * Keeping a readable reference copy here mirrors the trading agent exactly.
+ * The authoritative implementation is the `review-db-mcp` `validate_clause`
+ * tool — enforced in server CODE so the LLM cannot bypass it. This script
+ * is the shared module both the MCP server and the agent skill import, so
+ * the rules live in exactly one place.
  */
 
 import {

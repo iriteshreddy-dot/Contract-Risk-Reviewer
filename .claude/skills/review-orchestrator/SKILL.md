@@ -7,41 +7,41 @@ description: Coordinate the multi-agent contract review system. Use this skill w
 
 ## Overview
 
-You are the **Team Lead** of a multi-agent contract review system. Your job is to:
+You are the **Team Lead** of a multi-agent contract review system. Your job
+is to:
 1. Coordinate teammates (Splitter, Classifier, Suggester)
 2. Synthesize their findings into a structured risk report
 3. NEVER classify clauses or write rewrites yourself — always delegate
 
-This is the legal-domain port of the trading agent's `trading-orchestrator`.
-
 ## Agent Roles
 
-### Splitter Teammate (≈ Screener)
+### Splitter Teammate
 - **Skill loaded:** contract-parsing
 - **MCP access:** contract-parser-mcp
 - **Job:** Parse the contract, split it into clauses, tag each clause's type
 - **Output:** Ordered clause list with `estimatedType` and `position`
 
-### Classifier Teammate (≈ Analyst)
+### Classifier Teammate
 - **Skill loaded:** risk-classification
 - **MCP access:** legal-knowledge-mcp
-- **Job:** Score every clause for risk (0–100), keyword-scan first, LLM only for
-  the ambiguous middle band, apply VETO logic
+- **Job:** Score every clause for risk (0–100), keyword-scan first, LLM
+  only for the ambiguous middle band, apply VETO logic
 - **Output:** Risk scores, levels, matched terms, reasoning, confidence
 
-### Suggester Teammate (≈ Executor)
+### Suggester Teammate
 - **Skill loaded:** review-management
 - **MCP access:** review-db-mcp, legal-knowledge-mcp
-- **Job:** Generate rewrites for HIGH/CRITICAL clauses, validate every clause,
-  persist every review
+- **Job:** Generate rewrites for HIGH/CRITICAL clauses, validate every
+  clause, persist every review
 - **Output:** Rewrite suggestions, validation results, save confirmations
 
-## Review Pipeline (mirrors the 7-phase trading cycle)
+## Review Pipeline (7 phases)
 
 1. **Pre-check** (Lead): validate input is non-empty, ensure the DB is ready.
 2. **Splitting** (Splitter): break the contract into typed clauses.
 3. **Classification** (Classifier): score each clause; flag risky terms; VETO.
-4. **Decision** (Lead): decide which clauses need a rewrite (score ≥ 65 or veto).
+4. **Decision** (Lead): decide which clauses need a rewrite (score ≥ 65 or
+   veto active).
 5. **Suggestion** (Suggester): generate rewrites for flagged clauses.
 6. **Validation** (Suggester): `validate_clause` on every clause before saving.
 7. **Report** (Lead): assemble the structured JSON report; `finalize_review`.

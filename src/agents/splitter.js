@@ -1,9 +1,9 @@
 /**
- * Splitter Agent — the Screener equivalent.
+ * Splitter Agent.
  *
  * Job: turn raw contract input into a structured clause list. Calls the
- * contract-parser-mcp tools and leans on heuristics first (batch-first, cheap),
- * exactly as the Screener scans the watchlist before any deep analysis.
+ * contract-parser-mcp tools and leans on heuristics first — cheap, fast,
+ * and good enough for most contracts before the LLM is consulted.
  *
  * The Splitter NEVER scores risk — it only parses and structures.
  */

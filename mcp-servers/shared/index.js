@@ -1,10 +1,10 @@
 /**
  * Shared configuration and utilities for all MCP servers and agents.
- * Mirrors mcp-servers/shared/__init__.py from the trading agent.
  *
- * Constants here are IMMUTABLE — they are the legal-domain equivalent of the
- * trading agent's hard-coded risk limits. Validation logic that consumes them
- * lives in review-db-mcp (server CODE, not prompts).
+ * The constants here are IMMUTABLE — they define the system's risk
+ * thresholds, veto terms, and validation rules. The logic that consumes
+ * them lives in review-db-mcp (server CODE, not prompts), so the LLM
+ * cannot talk its way past these limits.
  */
 
 import 'dotenv/config';
@@ -22,7 +22,7 @@ export const DB_PATH =
 export const ANTHROPIC_MODEL = process.env.ANTHROPIC_MODEL || 'claude-sonnet-4-5';
 export const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || '';
 
-// ── Risk thresholds (IMMUTABLE — mirrors IMMUTABLE RISK LIMITS) ──
+// ── Risk thresholds (IMMUTABLE) ────────────────────────────
 // Risk score 0-100 maps to a level using these boundaries.
 export const RISK_THRESHOLDS = {
   LOW_MAX: 35,
@@ -35,7 +35,8 @@ export const RISK_THRESHOLDS = {
 export const RISKY_SCORE_FLOOR = 65;
 
 // ── VETO terms (automatic HIGH RISK regardless of composite score) ──
-// Legal equivalent of the trading agent's RED_FLAGS sentiment veto.
+// A clause containing any of these is forced to at least HIGH; two or
+// more force CRITICAL. These are the most dangerous drafting patterns.
 export const VETO_TERMS = [
   'unlimited liability',
   'perpetual irrevocable',
@@ -62,7 +63,7 @@ export const CLAUSE_TYPES = [
 export const RISK_LEVELS = ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'];
 export const CONFIDENCE_LEVELS = ['HIGH', 'MODERATE', 'LOW'];
 
-// ── Validation rules (mirrors check_risk_limits constants) ──
+// ── Validation rules (consumed by validate_clause) ─────────
 export const VALIDATION_RULES = {
   MIN_CLAUSE_LENGTH: 10,
   MAX_CLAUSE_LENGTH: 5000,

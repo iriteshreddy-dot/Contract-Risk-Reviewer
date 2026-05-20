@@ -1,9 +1,9 @@
 /**
- * Suggester Agent — the Executor equivalent.
+ * Suggester Agent.
  *
- * Job: generate rewrite suggestions for risky clauses and persist every clause
- * review. Mirrors the Executor's discipline exactly:
- *   - ALWAYS calls validate_clause BEFORE saving (mirror: always check_risk_limits).
+ * Job: generate rewrite suggestions for risky clauses and persist every
+ * clause review. The Suggester's discipline:
+ *   - ALWAYS calls validate_clause BEFORE saving — defense in depth.
  *   - Generates rewrites only for HIGH/CRITICAL clauses.
  *   - If validation fails -> log the rejection reason and continue.
  *   - Safety principle: a clause that cannot be validated is never saved.
@@ -62,7 +62,7 @@ export const suggester = {
         rewriteSource = r.source;
       }
 
-      // ── ALWAYS validate before saving (mirror: always check_risk_limits) ──
+      // ── ALWAYS validate before saving (defense in depth — the MCP server validates again) ──
       const validation = await db.call('validate_clause', {
         contractId,
         clauseText: clause.text,

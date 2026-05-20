@@ -1,12 +1,12 @@
 /**
- * Classifier Agent — the Analyst equivalent.
+ * Classifier Agent.
  *
- * Job: score each clause for legal risk (0-100). Mirrors the Analyst:
+ * Job: score each clause for legal risk (0-100).
  *   1. Keyword scan first  — legal-knowledge-mcp score_clause_sentiment (free).
- *   2. Composite scoring   — scoreClauseRisk (mirrors compute_composite_score).
- *   3. Structural patterns — detectPatterns (mirrors detect_patterns).
+ *   2. Composite scoring   — scoreClauseRisk combines per-category sub-scores.
+ *   3. Structural patterns — detectPatterns flags one-sided drafting.
  *   4. LLM ONLY for the ambiguous middle band (confidence === 'LOW').
- *   5. VETO logic          — a veto term forces at least HIGH risk.
+ *   5. VETO logic          — one veto term forces HIGH; two or more force CRITICAL.
  *
  * The Classifier NEVER writes rewrites or touches the database.
  */

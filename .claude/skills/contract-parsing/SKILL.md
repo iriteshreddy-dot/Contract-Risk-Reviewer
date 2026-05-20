@@ -8,14 +8,12 @@ description: Parse contracts and split them into individual clauses. Use this sk
 ## Overview
 
 This skill turns raw contract input into a structured clause list. It is the
-legal-domain equivalent of the trading agent's `market-data` skill — the
 front door through which all data enters the system.
 
 ## Splitting Strategy — Heuristics First
 
-Mirror the batch-first discipline of `get_watchlist_quotes()`: cheap heuristics
-run FIRST, the LLM is only a fallback. Clause boundaries are detected, in
-priority order, by:
+Cheap heuristics run FIRST, the LLM is only a fallback. Clause boundaries are
+detected, in priority order, by:
 
 1. **Numbered sections** — `1.`, `1.1`, `12.`
 2. **Named sections** — `ARTICLE IV`, `SECTION 3`, `CLAUSE 2`
@@ -31,9 +29,9 @@ clause so a bare heading line never becomes a standalone clause.
 `LIABILITY · INDEMNITY · IP · TERMINATION · PAYMENT · CONFIDENTIALITY ·
 GOVERNING_LAW · OTHER`
 
-`identifyClauseType` scores a clause against per-type keyword sets and returns
-the best match plus a 0–1 confidence. **Low confidence is the signal to escalate
-to the LLM** — do not guess.
+`identifyClauseType` scores a clause against per-type keyword sets and
+returns the best match plus a 0–1 confidence. **Low confidence is the signal
+to escalate to the LLM** — do not guess.
 
 ## MCP Tools (contract-parser-mcp)
 

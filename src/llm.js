@@ -2,10 +2,10 @@
  * Anthropic LLM wrapper.
  *
  * The system is designed to run WITHOUT an API key — keyword scanning and
- * clause templates cover the whole pipeline. When ANTHROPIC_API_KEY is set the
- * LLM is consulted only for the expensive-judgement cases: clauses the keyword
- * scan leaves ambiguous, and bespoke rewrites. This mirrors the trading agent's
- * "batch first, individual only when needed" cost discipline.
+ * clause templates cover the whole pipeline. When ANTHROPIC_API_KEY is set
+ * the LLM is consulted only for the expensive-judgement cases: clauses the
+ * keyword scan leaves ambiguous, and bespoke rewrites for HIGH / CRITICAL
+ * clauses. Cheap path first, expensive path only when it pays off.
  */
 
 import Anthropic from '@anthropic-ai/sdk';
